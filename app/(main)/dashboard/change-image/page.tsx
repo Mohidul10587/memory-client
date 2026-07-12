@@ -6,7 +6,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import useSWRMutation from 'swr/mutation';
 import { studentsApi, teachersApi } from '@/lib/api';
 import { Navbar } from '@/components/layout/Navbar';
-import { Avatar } from '@/components/ui/Avatar';
 import { ArrowLeft, Camera, CheckCircle2, AlertCircle, Upload } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -87,16 +86,22 @@ export default function ChangeImagePage() {
           <div className="flex flex-col items-center gap-4">
             <div className="relative">
               {preview ? (
-                <div className="h-32 w-32 rounded-full overflow-hidden ring-4 ring-blue-100">
-                  <Image src={preview} alt="নতুন ছবি" width={128} height={128} className="object-cover w-full h-full" />
+                <div className="w-72 h-72 rounded-xl overflow-hidden ring-4 ring-blue-100">
+                  <Image src={preview} alt="নতুন ছবি" width={288} height={288} className="object-cover w-full h-full" />
+                </div>
+              ) : currentImage ? (
+                <div className="w-72 h-72 rounded-xl overflow-hidden ring-4 ring-gray-100">
+                  <Image src={currentImage} alt={name} width={288} height={288} className="object-cover w-full h-full" />
                 </div>
               ) : (
-                <Avatar src={currentImage} name={name} size="xl" className="ring-4 ring-gray-100" />
+                <div className="w-72 h-72 rounded-xl bg-gray-100 ring-4 ring-gray-100 flex items-center justify-center">
+                  <span className="text-7xl font-bold text-gray-400">{name.charAt(0).toUpperCase()}</span>
+                </div>
               )}
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="absolute bottom-0 right-0 bg-blue-600 text-white rounded-full p-2 shadow-md hover:bg-blue-700 transition-colors"
+                className="absolute bottom-2 right-2 bg-blue-600 text-white rounded-full p-2 shadow-md hover:bg-blue-700 transition-colors"
               >
                 <Camera className="h-4 w-4" />
               </button>
