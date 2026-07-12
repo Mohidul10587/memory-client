@@ -45,21 +45,24 @@ function PersonCard({
   phone?: string;
   accentColor: 'blue' | 'green';
 }) {
-  const btn =
+  const linkColor =
     accentColor === 'blue'
-      ? 'bg-blue-600 hover:bg-blue-700'
-      : 'bg-green-600 hover:bg-green-700';
+      ? 'text-blue-600 hover:text-blue-700'
+      : 'text-green-600 hover:text-green-700';
 
   return (
-    <div className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden flex flex-col">
-      {/* Full-width photo */}
-      <div className="relative w-full aspect-[3/4] bg-gray-100 shrink-0">
+    <Link
+      href={`/profile/${userId}`}
+      className="group rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden flex flex-col hover:shadow-md hover:border-gray-200 transition-all duration-200"
+    >
+      {/* Photo */}
+      <div className="relative w-full aspect-[4/5] bg-gray-100 shrink-0">
         {profileImage ? (
           <Image
             src={profileImage}
             alt={name}
             fill
-            className="object-cover object-top"
+            className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         ) : (
@@ -67,25 +70,20 @@ function PersonCard({
         )}
       </div>
 
-      {/* Info + button */}
-      <div className="p-3 flex flex-col gap-2 flex-1">
-        <p className="font-semibold text-gray-900 line-clamp-1 text-sm">{name}</p>
+      {/* Name + info */}
+      <div className="px-3 py-3 flex flex-col gap-1">
+        <p className="font-semibold text-gray-900 text-sm leading-snug line-clamp-1">{name}</p>
 
         {phone && (
-          <div className="flex items-center gap-1.5 text-xs text-gray-500">
-            <Phone className="h-3 w-3 shrink-0 text-gray-400" />
+          <div className="flex items-center gap-1.5 text-xs text-gray-400">
+            <Phone className="h-3 w-3 shrink-0" />
             <span>{phone}</span>
           </div>
         )}
 
-        <Link
-          href={`/profile/${userId}`}
-          className={`mt-auto text-center text-xs font-medium text-white py-1.5 rounded-lg transition-colors ${btn}`}
-        >
-          বিস্তারিত দেখুন
-        </Link>
+        <span className={`mt-1 text-xs font-medium ${linkColor}`}>বিস্তারিত →</span>
       </div>
-    </div>
+    </Link>
   );
 }
 
