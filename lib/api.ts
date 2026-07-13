@@ -64,7 +64,8 @@ async function fetchWithAuth<T>(
       // Logout — but don't redirect if already on an auth page
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      const isAuthPage = window.location.pathname.startsWith("/login") ||
+      const isAuthPage =
+        window.location.pathname.startsWith("/login") ||
         window.location.pathname.startsWith("/register");
       if (!isAuthPage) {
         window.location.href = "/login";
@@ -250,7 +251,7 @@ export { ApiError };
 
 export const adminUsersApi = {
   getAll: (params?: Record<string, string>) => {
-    const query = params ? '?' + new URLSearchParams(params).toString() : '';
+    const query = params ? "?" + new URLSearchParams(params).toString() : "";
     return fetchWithAuth<PaginatedResponse<unknown>>(`/users${query}`);
   },
 
@@ -259,25 +260,25 @@ export const adminUsersApi = {
 
   updateStudent: (userId: string, data: Record<string, unknown>) =>
     fetchWithAuth<ApiResponse<unknown>>(`/users/${userId}/student`, {
-      method: 'PATCH',
+      method: "PATCH",
       body: JSON.stringify(data),
     }),
 
   updateTeacher: (userId: string, data: Record<string, unknown>) =>
     fetchWithAuth<ApiResponse<unknown>>(`/users/${userId}/teacher`, {
-      method: 'PATCH',
+      method: "PATCH",
       body: JSON.stringify(data),
     }),
 
   toggleActive: (userId: string) =>
     fetchWithAuth<ApiResponse<unknown>>(`/users/${userId}/toggle-active`, {
-      method: 'PATCH',
+      method: "PATCH",
     }),
 
   delete: (userId: string) =>
     fetchWithAuth<ApiResponse<unknown>>(`/users/${userId}`, {
-      method: 'DELETE',
+      method: "DELETE",
     }),
 
-  getStats: () => fetchWithAuth<ApiResponse<unknown>>('/users/stats'),
+  getStats: () => fetchWithAuth<ApiResponse<unknown>>("/users/stats"),
 };

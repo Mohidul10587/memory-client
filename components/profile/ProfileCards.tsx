@@ -281,3 +281,71 @@ export function TeacherCard({ userId, name, profileImage }: TeacherCardProps) {
     />
   );
 }
+
+// ─── Small Student Card (other batches) ──────────────────────────────────────
+
+interface SmallStudentCardProps {
+  userId: string;
+  name: string;
+  phone?: string;
+  profileImage?: string | null;
+}
+
+export function SmallStudentCard({ userId, name, phone, profileImage }: SmallStudentCardProps) {
+  const [showPhonePopup, setShowPhonePopup] = useState(false);
+
+  return (
+    <>
+      <div className="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden flex flex-col hover:shadow-md hover:border-gray-200 transition-all duration-200">
+        {/* Photo */}
+        <Link href={`/profile/${userId}`} className="block">
+          <div className="relative w-full aspect-square bg-gray-100 shrink-0">
+            {profileImage ? (
+              <Image
+                src={profileImage}
+                alt={name}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+              />
+            ) : (
+              <AvatarFallback name={name} />
+            )}
+          </div>
+        </Link>
+
+        {/* Info */}
+        <div className="px-2.5 py-2 flex flex-col gap-1">
+          {/* Name */}
+          <p className="font-semibold text-gray-900 text-xs leading-snug line-clamp-1">
+            {name}
+          </p>
+
+          {/* Phone */}
+          {phone && (
+            <button
+              type="button"
+              onClick={() => setShowPhonePopup(true)}
+              className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 transition-colors w-fit"
+            >
+              <Phone className="h-3 w-3 shrink-0" />
+              <span className="truncate max-w-[100px]">{phone}</span>
+            </button>
+          )}
+
+          {/* Profile link */}
+          <Link
+            href={`/profile/${userId}`}
+            className="text-xs font-medium text-blue-600 hover:text-blue-700"
+          >
+            প্রোফাইল দেখুন →
+          </Link>
+        </div>
+      </div>
+
+      {showPhonePopup && phone && (
+        <PhonePopup phone={phone} onClose={() => setShowPhonePopup(false)} />
+      )}
+    </>
+  );
+}
