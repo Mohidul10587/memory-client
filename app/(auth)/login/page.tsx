@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
 import { Eye, EyeOff, Phone, Lock, AlertCircle } from 'lucide-react';
 
@@ -41,8 +42,15 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-lg mb-4">
-            <span className="text-white text-2xl font-bold">অ্যা</span>
+          <div className="inline-flex mb-4">
+            <Image
+              src="/logo.svg"
+              alt="লোগো"
+              width={64}
+              height={64}
+              className="rounded-2xl shadow-lg"
+              priority
+            />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">স্বাগতম!</h1>
           <p className="text-gray-500 mt-1">আপনার অ্যাকাউন্টে প্রবেশ করুন</p>

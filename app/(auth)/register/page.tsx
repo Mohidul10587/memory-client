@@ -104,8 +104,15 @@ export default function RegisterPage() {
 
         {/* Logo & Title */}
         <div className="text-center mb-8">
-          <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-xl shadow-blue-200 mb-4">
-            <span className="text-white text-2xl font-bold">অ্যা</span>
+          <div className="inline-flex mb-4">
+            <Image
+              src="/logo.svg"
+              alt="লোগো"
+              width={64}
+              height={64}
+              className="rounded-2xl shadow-xl shadow-blue-200"
+              priority
+            />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">অ্যালামনাই নিবন্ধন</h1>
           <p className="text-sm text-gray-500 mt-1">আপনার তথ্য দিয়ে একাউন্ট তৈরি করুন</p>

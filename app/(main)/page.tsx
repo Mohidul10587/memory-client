@@ -12,6 +12,16 @@ import { BatchInfo, StudentProfile, TeacherProfile } from '@/lib/types';
 import { Users, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 
+// Fisher-Yates shuffle — new array প্রতিবার render-এ random order
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 export default function HomePage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
@@ -24,10 +34,10 @@ export default function HomePage() {
   const isTeacher = user?.role === 'TEACHER';
   const myBatchYear = user?.studentProfile?.sscPassingYear;
 
-  // My batch (students only)
+  // My batch (students only) — no limit, fetch all
   const { data: myBatchData, isLoading: myBatchLoading } = useSWR(
     isAuthenticated && isStudent && myBatchYear ? ['my-batch', myBatchYear] : null,
-    () => studentsApi.getByBatch(myBatchYear!, { limit: '12' }),
+    () => studentsApi.getByBatch(myBatchYear!),
     { revalidateOnFocus: false },
   );
 
@@ -116,14 +126,11 @@ export default function HomePage() {
         {/* ── STUDENT view: own batch first ── */}
         {isStudent && myBatchYear && (
           <section>
-            <div className="flex items-center justify-between mb-4">
+            <div className="mb-4">
               <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
                 <GraduationCap className="h-5 w-5 text-blue-600" />
                 আমার এসএসসি ব্যাচ — {myBatchYear}
               </h2>
-              <Link href={`/batch/${myBatchYear}`} className="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                সবাইকে দেখুন →
-              </Link>
             </div>
             {myBatchLoading ? (
               <LoadingSpinner />
@@ -131,7 +138,7 @@ export default function HomePage() {
               <p className="text-center text-gray-500 py-8">কোনো সহপাঠী পাওয়া যায়নি</p>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {(myBatchData.data as (StudentProfile & { user: { id: string; phone: string } })[]).map((s) => (
+                {shuffleArray(myBatchData.data as (StudentProfile & { user: { id: string; phone: string } })[]).map((s) => (
                   <StudentCard
                     key={s.id}
                     userId={s.user.id}

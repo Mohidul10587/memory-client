@@ -6,6 +6,12 @@ import QueryProvider from "@/components/providers/QueryProvider";
 export const metadata: Metadata = {
   title: "স্কুল অ্যালামনাই",
   description: "স্কুলের প্রাক্তন শিক্ষার্থী ও শিক্ষকদের সংযোগ মঞ্চ",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+  },
 };
 
 export default function RootLayout({

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
 import { Avatar } from '@/components/ui/Avatar';
 import { useRouter, usePathname } from 'next/navigation';
@@ -46,9 +47,14 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center">
-            <span className="text-white text-xs font-bold">অ্যা</span>
-          </div>
+          <Image
+            src="/logo.svg"
+            alt="লোগো"
+            width={36}
+            height={36}
+            className="rounded-xl"
+            priority
+          />
           <span className="font-bold text-gray-900 hidden sm:block">
             {user?.school?.name || 'স্কুল অ্যালামনাই'}
           </span>
