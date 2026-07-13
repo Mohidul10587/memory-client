@@ -125,45 +125,44 @@ export default function ProfilePage({ params }: { params: Promise<{ userId: stri
 
           <div className="px-5 pb-6 space-y-5">
             {/* About */}
-            {profile.about && (
-              <p className="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">{profile.about}</p>
-            )}
+            <div className="border-t border-gray-100 pt-4">
+              {profile.about ? (
+                <p className="text-gray-600 text-sm leading-relaxed">{profile.about}</p>
+              ) : (
+                <p className="text-gray-400 text-xs italic">পরিচয় যোগ করা হয়নি</p>
+              )}
+            </div>
 
             {/* Info Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {userData.phone && (
-                <InfoItem icon={<Phone className="h-4 w-4 text-blue-500" />} label="ফোন" value={userData.phone} />
-              )}
-              {profile.email && (
-                <InfoItem icon={<Mail className="h-4 w-4 text-orange-500" />} label="ইমেইল" value={profile.email} />
-              )}
-              {profile.bloodGroup && (
-                <InfoItem icon={<Droplets className="h-4 w-4 text-red-500" />} label="রক্তের গ্রুপ" value={BLOOD_GROUP_LABELS[profile.bloodGroup]} />
-              )}
-              {isStudent && (profile as StudentProfile).profession && (
-                <InfoItem icon={<Briefcase className="h-4 w-4 text-purple-500" />} label="পেশা" value={(profile as StudentProfile).profession!} />
-              )}
-              {isStudent && (profile as StudentProfile).workplace && (
-                <InfoItem icon={<Briefcase className="h-4 w-4 text-indigo-500" />} label="কর্মস্থল" value={(profile as StudentProfile).workplace!} />
+              <InfoItem icon={<Phone className="h-4 w-4 text-blue-500" />} label="ফোন" value={userData.phone} />
+              <InfoItem icon={<Mail className="h-4 w-4 text-orange-500" />} label="ইমেইল" value={profile.email} />
+              <InfoItem icon={<Droplets className="h-4 w-4 text-red-500" />} label="রক্তের গ্রুপ" value={profile.bloodGroup ? BLOOD_GROUP_LABELS[profile.bloodGroup] : null} />
+              {isStudent && (
+                <>
+                  <InfoItem icon={<Briefcase className="h-4 w-4 text-purple-500" />} label="পেশা" value={(profile as StudentProfile).profession} />
+                  <InfoItem icon={<Briefcase className="h-4 w-4 text-indigo-500" />} label="কর্মস্থল" value={(profile as StudentProfile).workplace} />
+                </>
               )}
               {!isStudent && (
                 <InfoItem icon={<BookOpen className="h-4 w-4 text-green-500" />} label="যোগদানের সাল" value={String((profile as TeacherProfile).joiningYear)} />
               )}
-              {profile.currentAddress && (
-                <InfoItem icon={<MapPin className="h-4 w-4 text-teal-500" />} label="বর্তমান ঠিকানা" value={profile.currentAddress} />
-              )}
-              {profile.permanentAddress && (
-                <InfoItem icon={<MapPin className="h-4 w-4 text-gray-500" />} label="স্থায়ী ঠিকানা" value={profile.permanentAddress} />
-              )}
+              <InfoItem icon={<MapPin className="h-4 w-4 text-teal-500" />} label="বর্তমান ঠিকানা" value={profile.currentAddress} />
+              <InfoItem icon={<MapPin className="h-4 w-4 text-gray-500" />} label="স্থায়ী ঠিকানা" value={profile.permanentAddress} />
             </div>
 
             {/* Facebook */}
-            {profile.facebookProfile && (
+            {profile.facebookProfile ? (
               <a href={profile.facebookProfile} target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 transition-colors">
                 <Facebook className="h-4 w-4" />
                 ফেসবুক প্রোফাইল দেখুন
               </a>
+            ) : (
+              <p className="flex items-center gap-2 text-xs text-gray-400 italic">
+                <Facebook className="h-4 w-4" />
+                ফেসবুক প্রোফাইল যোগ করা হয়নি
+              </p>
             )}
           </div>
         </div>
@@ -178,14 +177,18 @@ function InfoItem({
 }: {
   icon: React.ReactNode;
   label: string;
-  value: string;
+  value?: string | null;
 }) {
   return (
     <div className="flex items-start gap-2.5 p-3 rounded-lg bg-gray-50">
       <div className="mt-0.5">{icon}</div>
       <div>
         <p className="text-xs text-gray-400">{label}</p>
-        <p className="text-sm font-medium text-gray-800 mt-0.5">{value}</p>
+        {value ? (
+          <p className="text-sm font-medium text-gray-800 mt-0.5">{value}</p>
+        ) : (
+          <p className="text-xs text-gray-400 italic mt-0.5">যোগ করা হয়নি</p>
+        )}
       </div>
     </div>
   );
