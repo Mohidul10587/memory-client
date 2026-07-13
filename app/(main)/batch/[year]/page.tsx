@@ -8,7 +8,6 @@ import { studentsApi } from '@/lib/api';
 import { StudentCard } from '@/components/profile/ProfileCards';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { Pagination } from '@/components/ui/Pagination';
-import { Navbar } from '@/components/layout/Navbar';
 import { StudentProfile } from '@/lib/types';
 import { ArrowLeft, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
@@ -33,9 +32,7 @@ export default function BatchPage({ params }: { params: Promise<{ year: string }
   const meta = data?.meta;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="max-w-6xl mx-auto px-4 py-6">
+    <div className="max-w-6xl mx-auto px-4 py-6">
         <div className="flex items-center gap-3 mb-6">
           <Link href="/" className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
             <ArrowLeft className="h-5 w-5 text-gray-600" />
@@ -83,7 +80,6 @@ export default function BatchPage({ params }: { params: Promise<{ year: string }
             )}
           </>
         )}
-      </main>
     </div>
   );
 }

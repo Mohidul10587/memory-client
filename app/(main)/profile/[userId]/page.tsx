@@ -6,7 +6,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import useSWR from 'swr';
 import { studentsApi, teachersApi } from '@/lib/api';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { Navbar } from '@/components/layout/Navbar';
 import { BLOOD_GROUP_LABELS, StudentProfile, TeacherProfile, User } from '@/lib/types';
 import Image from 'next/image';
 import {
@@ -44,25 +43,19 @@ export default function ProfilePage({ params }: { params: Promise<{ userId: stri
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Navbar />
-        <div className="flex items-center justify-center py-24">
-          <LoadingSpinner text="প্রোফাইল লোড হচ্ছে..." size="lg" />
-        </div>
+      <div className="flex items-center justify-center py-24">
+        <LoadingSpinner text="প্রোফাইল লোড হচ্ছে..." size="lg" />
       </div>
     );
   }
 
   if (!profileData) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Navbar />
-        <div className="text-center py-24">
-          <p className="text-gray-500">প্রোফাইল পাওয়া যায়নি</p>
-          <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm mt-2 inline-block">
-            হোমে ফিরুন
-          </Link>
-        </div>
+      <div className="text-center py-24">
+        <p className="text-gray-500">প্রোফাইল পাওয়া যায়নি</p>
+        <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm mt-2 inline-block">
+          হোমে ফিরুন
+        </Link>
       </div>
     );
   }
@@ -79,9 +72,7 @@ export default function ProfilePage({ params }: { params: Promise<{ userId: stri
     : (profile as TeacherProfile).profileImage;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="max-w-2xl mx-auto px-4 py-6">
+    <div className="max-w-2xl mx-auto px-4 py-6">
         {/* Back button */}
         <button
           onClick={() => router.back()}
@@ -176,7 +167,6 @@ export default function ProfilePage({ params }: { params: Promise<{ userId: stri
             )}
           </div>
         </div>
-      </main>
     </div>
   );
 }

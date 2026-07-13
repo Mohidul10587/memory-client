@@ -106,31 +106,18 @@ export default function AdminUsersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link
-              href="/admin"
-              className="text-gray-400 hover:text-gray-600 transition-colors"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </Link>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                <Users className="h-4 w-4 text-white" />
-              </div>
-              <span className="font-bold text-gray-900">সব ইউজার</span>
-            </div>
-          </div>
-          <span className="text-sm text-gray-500">
-            {meta ? `মোট ${meta.total} জন` : '...'}
-          </span>
+    <div className="space-y-4">
+      {/* Page header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="font-bold text-gray-900 text-lg">সব ইউজার</span>
+          {meta && (
+            <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-medium">
+              {meta.total} জন
+            </span>
+          )}
         </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 py-6 space-y-4">
+      </div>
         {/* Search + Filter Bar */}
         <div className="flex gap-2">
           <div className="relative flex-1">
@@ -426,7 +413,6 @@ export default function AdminUsersPage() {
             </div>
           </div>
         )}
-      </main>
 
       {/* Delete Confirm Modal */}
       {confirmDelete && (

@@ -8,7 +8,6 @@ import { studentsApi, teachersApi } from '@/lib/api';
 import { StudentCard, TeacherCard } from '@/components/profile/ProfileCards';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { Pagination } from '@/components/ui/Pagination';
-import { Navbar } from '@/components/layout/Navbar';
 import { BLOOD_GROUP_LABELS, BloodGroup, StudentProfile, TeacherProfile } from '@/lib/types';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -87,10 +86,8 @@ export default function SearchPage() {
   const hasFilters = sscYear || bloodGroup || profession || joiningYear || subject;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="max-w-6xl mx-auto px-4 py-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-5">অনুসন্ধান</h1>
+    <div className="max-w-6xl mx-auto px-4 py-6">
+      <h1 className="text-2xl font-bold text-gray-900 mb-5">অনুসন্ধান</h1>
 
         {/* Search Bar */}
         <div className="relative mb-4">
@@ -244,7 +241,6 @@ export default function SearchPage() {
             {meta && <Pagination currentPage={page} totalPages={meta.totalPages} onPageChange={setPage} />}
           </>
         )}
-      </main>
     </div>
   );
 }

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { authApi } from '@/lib/api';
-import { Navbar } from '@/components/layout/Navbar';
 import { ArrowLeft, Eye, EyeOff, CheckCircle2, AlertCircle, Phone } from 'lucide-react';
 import Link from 'next/link';
 
@@ -66,9 +65,7 @@ export default function ChangePhonePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="max-w-md mx-auto px-4 py-6">
+    <div className="max-w-md mx-auto px-4 py-6">
         {/* Header */}
         <div className="flex items-center gap-3 mb-5">
           <Link href="/dashboard" className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
@@ -166,7 +163,6 @@ export default function ChangePhonePage() {
             </button>
           </form>
         </div>
-      </main>
     </div>
   );
 }

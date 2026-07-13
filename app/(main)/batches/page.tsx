@@ -6,7 +6,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import useSWR from 'swr';
 import { studentsApi } from '@/lib/api';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { Navbar } from '@/components/layout/Navbar';
 import { BatchInfo } from '@/lib/types';
 import { GraduationCap, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -28,9 +27,7 @@ export default function BatchesPage() {
   const batches = (data?.data as BatchInfo[]) || [];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="max-w-6xl mx-auto px-4 py-6">
+    <div className="max-w-6xl mx-auto px-4 py-6">
         <div className="flex items-center gap-3 mb-6">
           <Link href="/" className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
             <ArrowLeft className="h-5 w-5 text-gray-600" />
@@ -64,7 +61,6 @@ export default function BatchesPage() {
             ))}
           </div>
         )}
-      </main>
     </div>
   );
 }

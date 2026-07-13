@@ -104,18 +104,21 @@ export default function RegisterPage() {
 
         {/* Logo & Title */}
         <div className="text-center mb-8">
-          <div className="inline-flex mb-4">
+          <div className="inline-flex mb-5">
             <Image
               src="/logo.svg"
               alt="লোগো"
-              width={64}
-              height={64}
+              width={72}
+              height={72}
               className="rounded-2xl shadow-xl shadow-blue-200"
               priority
             />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">অ্যালামনাই নিবন্ধন</h1>
-          <p className="text-sm text-gray-500 mt-1">আপনার তথ্য দিয়ে একাউন্ট তৈরি করুন</p>
+          <h1 className="text-2xl font-bold text-gray-900">যোগ দিন আমাদের সাথে ✨</h1>
+          <p className="text-gray-500 mt-2 text-sm leading-relaxed">
+            আপনার স্কুলের স্মৃতি, বন্ধুরা এবং শিক্ষকরা —<br />
+            সবকিছু এক জায়গায়। নিবন্ধন করুন, সংযুক্ত থাকুন।
+          </p>
         </div>
 
         <div className="bg-white rounded-3xl shadow-xl shadow-gray-100 border border-gray-100 overflow-hidden">
@@ -316,9 +319,9 @@ export default function RegisterPage() {
           </form>
 
           <div className="px-6 pb-6 text-center text-sm text-gray-400">
-            ইতিমধ্যে অ্যাকাউন্ট আছে?{' '}
+            আগে থেকেই আছেন?{' '}
             <Link href="/login" className="text-blue-600 hover:text-blue-700 font-semibold">
-              লগইন করুন
+              ফিরে আসুন →
             </Link>
           </div>
         </div>

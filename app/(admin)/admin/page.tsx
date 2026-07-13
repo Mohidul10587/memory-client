@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { schoolsApi, adminUsersApi } from '@/lib/api';
 import { School } from '@/lib/types';
 import {
-  School as SchoolIcon, Plus, LogOut, LayoutDashboard, Users, ToggleLeft, ToggleRight,
+  School as SchoolIcon, Plus, Users, ToggleLeft, ToggleRight,
   GraduationCap, BookOpen,
 } from 'lucide-react';
 
@@ -37,37 +37,12 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top Bar */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-              <LayoutDashboard className="h-4 w-4 text-white" />
-            </div>
-            <span className="font-bold text-gray-900">Super Admin Panel</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-500 hidden sm:block">
-              📞 {user?.phone}
-            </span>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-1.5 text-sm text-red-600 border border-red-200 px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors"
-            >
-              <LogOut className="h-4 w-4" />
-              লগআউট
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-4 py-8 space-y-8">
-        {/* Welcome */}
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">স্বাগতম, Super Admin 👋</h1>
-          <p className="text-sm text-gray-500 mt-1">সকল স্কুল পরিচালনা করুন এখান থেকে।</p>
-        </div>
+    <div className="space-y-6">
+      {/* Welcome */}
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900">স্বাগতম, Super Admin 👋</h1>
+        <p className="text-sm text-gray-500 mt-1">সকল স্কুল পরিচালনা করুন এখান থেকে।</p>
+      </div>
 
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -179,7 +154,6 @@ export default function AdminDashboardPage() {
             </div>
           )}
         </div>
-      </main>
     </div>
   );
 }

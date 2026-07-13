@@ -7,7 +7,6 @@ import useSWR from 'swr';
 import { studentsApi, teachersApi } from '@/lib/api';
 import { StudentCard, TeacherCard } from '@/components/profile/ProfileCards';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { Navbar } from '@/components/layout/Navbar';
 import { BatchInfo, StudentProfile, TeacherProfile } from '@/lib/types';
 import { Users, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
@@ -27,8 +26,10 @@ export default function HomePage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) router.push('/login');
-  }, [authLoading, isAuthenticated, router]);
+    if (authLoading) return;
+    if (!isAuthenticated) { router.push('/login'); return; }
+    if (user?.role === 'SUPER_ADMIN') { router.push('/admin'); return; }
+  }, [authLoading, isAuthenticated, user, router]);
 
   const isStudent = user?.role === 'STUDENT';
   const isTeacher = user?.role === 'TEACHER';
@@ -70,10 +71,7 @@ export default function HomePage() {
   const teachers = (teachersData?.data as (TeacherProfile & { user: { id: string; phone: string } })[]) || [];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-
-      <main className="max-w-6xl mx-auto px-4 py-6 space-y-10">
+    <div className="max-w-6xl mx-auto px-4 py-6 space-y-10">
 
         {/* School banner */}
         {user?.school && (
@@ -180,7 +178,6 @@ export default function HomePage() {
           )}
         </section>
 
-      </main>
     </div>
   );
 }

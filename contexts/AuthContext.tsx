@@ -8,7 +8,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  login: (phone: string, password: string) => Promise<void>;
+  login: (phone: string, password: string) => Promise<User>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
 }
@@ -49,7 +49,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     refreshUser();
   }, [refreshUser]);
 
-  const login = async (phone: string, password: string) => {
+  const login = async (phone: string, password: string): Promise<User> => {
     // Clear any stale tokens before attempting login
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
@@ -59,7 +59,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);
       setUser(data.user);
+      return data.user;
     }
+    throw new Error('লগইন ব্যর্থ হয়েছে');
   };
 
   const logout = async () => {

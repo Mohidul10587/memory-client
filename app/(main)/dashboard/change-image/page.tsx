@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import useSWRMutation from 'swr/mutation';
 import { studentsApi, teachersApi } from '@/lib/api';
-import { Navbar } from '@/components/layout/Navbar';
 import { ArrowLeft, Camera, CheckCircle2, AlertCircle, Upload } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -58,9 +57,7 @@ export default function ChangeImagePage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="max-w-md mx-auto px-4 py-6">
+    <div className="max-w-md mx-auto px-4 py-6">
         <div className="flex items-center gap-3 mb-5">
           <Link href="/dashboard" className="p-2 rounded-lg hover:bg-gray-100">
             <ArrowLeft className="h-5 w-5 text-gray-600" />
@@ -140,7 +137,6 @@ export default function ChangeImagePage() {
             </button>
           )}
         </div>
-      </main>
     </div>
   );
 }

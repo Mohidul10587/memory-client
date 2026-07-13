@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { AdminSidebar } from '@/components/layout/AdminSidebar';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -22,5 +23,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <AdminSidebar />
+      {/* pt-14 = mobile top bar height */}
+      <div className="lg:pl-60 flex flex-col min-h-screen bg-gray-50">
+        <main className="flex-1 pt-14 lg:pt-0 p-4 lg:p-6">
+          {children}
+        </main>
+      </div>
+    </>
+  );
 }

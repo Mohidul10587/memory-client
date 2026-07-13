@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import useSWRMutation from 'swr/mutation';
 import { authApi } from '@/lib/api';
-import { Navbar } from '@/components/layout/Navbar';
 import { ArrowLeft, Eye, EyeOff, CheckCircle2, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 
@@ -47,9 +46,7 @@ export default function ChangePasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="max-w-md mx-auto px-4 py-6">
+    <div className="max-w-md mx-auto px-4 py-6">
         <div className="flex items-center gap-3 mb-5">
           <Link href="/dashboard" className="p-2 rounded-lg hover:bg-gray-100">
             <ArrowLeft className="h-5 w-5 text-gray-600" />
@@ -125,7 +122,6 @@ export default function ChangePasswordPage() {
             {isMutating ? 'পরিবর্তন হচ্ছে...' : 'পাসওয়ার্ড পরিবর্তন করুন'}
           </button>
         </form>
-      </main>
     </div>
   );
 }

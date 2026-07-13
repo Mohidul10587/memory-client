@@ -27,8 +27,12 @@ export default function LoginPage() {
 
     setIsLoading(true);
     try {
-      await login(phone, password);
-      router.push('/');
+      const loggedInUser = await login(phone, password);
+      if (loggedInUser.role === 'SUPER_ADMIN') {
+        router.push('/admin');
+      } else {
+        router.push('/');
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'লগইন ব্যর্থ হয়েছে';
       setError(msg === 'Invalid credentials' ? 'ফোন নম্বর বা পাসওয়ার্ড ভুল' : msg);
@@ -42,18 +46,21 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex mb-4">
+          <div className="inline-flex mb-5">
             <Image
               src="/logo.svg"
               alt="লোগো"
-              width={64}
-              height={64}
+              width={72}
+              height={72}
               className="rounded-2xl shadow-lg"
               priority
             />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">স্বাগতম!</h1>
-          <p className="text-gray-500 mt-1">আপনার অ্যাকাউন্টে প্রবেশ করুন</p>
+          <h1 className="text-2xl font-bold text-gray-900">আবার ফিরে আসুন 👋</h1>
+          <p className="text-gray-500 mt-2 text-sm leading-relaxed">
+            পুরনো বন্ধু, প্রিয় শিক্ষক — সবাই অপেক্ষায় আছে।<br />
+            আপনার একাউন্টে প্রবেশ করুন।
+          </p>
         </div>
 
         {/* Form */}
@@ -119,9 +126,9 @@ export default function LoginPage() {
           </form>
 
           <p className="text-center text-sm text-gray-500 mt-6">
-            নতুন ব্যবহারকারী?{' '}
+            এখনও অ্যাকাউন্ট নেই?{' '}
             <Link href="/register" className="text-blue-600 hover:text-blue-700 font-medium">
-              নিবন্ধন করুন
+              বন্ধুদের সাথে যোগ দিন →
             </Link>
           </p>
         </div>
